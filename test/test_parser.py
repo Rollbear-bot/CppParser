@@ -13,7 +13,9 @@ class TestParser(unittest.TestCase):
     def test_file_io(self):
         file_path = "files/test.cpp"
         res = Parser(file_path).get_result()
-        res.save("./files/lines_without_blanks.cpp")
+        # res.save("./files/lines_without_blanks.cpp")
+
+        print(res.lines)
 
 
 if __name__ == '__main__':

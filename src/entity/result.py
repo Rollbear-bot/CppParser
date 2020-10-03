@@ -18,6 +18,9 @@ class Result:
     def get_concise(self):
         return Concise(self)
 
+    def get_text(self):
+        return self.lines
+
 
 class Concise(Result):
     """the most concise cpp source file"""

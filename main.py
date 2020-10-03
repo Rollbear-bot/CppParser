@@ -4,6 +4,7 @@
 # @Filename: main.py
 
 import sys
+from src.service.parser import Parser
 
 
 def main(argv: list):
@@ -26,8 +27,9 @@ def main(argv: list):
 
     with open(file_path, "r", encoding="utf8") as file_in:
         lines = file_in.readlines()
+        res = Parser(lines).get_result().lines
 
-    print(lines)
+    print(res)
 
 
 if __name__ == '__main__':
