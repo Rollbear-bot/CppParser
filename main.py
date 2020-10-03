@@ -4,7 +4,7 @@
 # @Filename: main.py
 
 import sys
-from src.service.parser import Parser
+from entity.parser import Parser
 
 
 def main(argv: list):

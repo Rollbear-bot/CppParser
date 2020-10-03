@@ -5,7 +5,7 @@
 
 import unittest
 
-from service.parser import Parser
+from entity.parser import Parser
 
 
 class TestParser(unittest.TestCase):
