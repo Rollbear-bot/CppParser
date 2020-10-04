@@ -3,8 +3,8 @@
 # @Author: Rollbear
 # @Filename: parser.py
 
-from entity.result import Result
-from entity.finite_automation import finite_automation_handler
+from src.entity.result import Result
+from src.entity.finite_automation import finite_automation_handler
 
 
 class Parser:

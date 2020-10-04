@@ -8,7 +8,7 @@ from tkinter import *
 from tkinter import filedialog
 from tkinter import messagebox
 
-from entity.parser import Parser
+from src.entity.parser import Parser
 
 # 根面板
 root = Tk()  # 创建窗口对象的背景色

@@ -3,7 +3,7 @@
 # @Author: Rollbear
 # @Filename: finite_automation.py
 
-from resource.symbols import operators, other_symbols, keywords
+from src.resource.symbols import operators, other_symbols, keywords
 
 LABELS = []
 BUFFER = ""
