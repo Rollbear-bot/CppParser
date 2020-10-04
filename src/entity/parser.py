@@ -4,7 +4,7 @@
 # @Filename: parser.py
 
 from entity.result import Result
-from entity.finite_automation import fa_handler
+from entity.finite_automation import finite_automation_handler
 
 
 class Parser:
@@ -83,7 +83,7 @@ class Parser:
             else:
                 # 其他情况
                 # todo::交给有穷自动机处理
-                res = fa_handler(row)
+                res = finite_automation_handler(row)
                 result_message = f"行{row_id+1}: \n"
                 for syb in res:
                     result_message += f"{syb[0]}\t{syb[1]}\n"
