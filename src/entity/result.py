@@ -19,7 +19,7 @@ class Result:
     def get_concise(self):
         return Concise(self)
 
-    def get_text(self):
+    def get_result_text(self):
         return "\n".join(self.result)
 
 

@@ -15,7 +15,7 @@ def finite_automation_handler(raw_string):
     BUFFER = ""
     LABELS = []
     case0_root(raw_string, 0)  # 跳转到状态0
-    return LABELS  # 改行的词法分析结果返回调用处
+    return LABELS  # 该行的词法分析结果返回调用处
 
 
 def is_letter(char):

@@ -24,7 +24,7 @@ label_file_path = Label(root, textvariable=file_path_str_obj)
 
 # 创建滚动条
 scroll = tkinter.Scrollbar()
-# 创建文本框text，设置宽度100，high不是高度，是文本显示的行数设置为3行
+# 创建展示解析结果的文本框
 text = tkinter.Text(root)
 
 
@@ -46,8 +46,7 @@ def run():
         messagebox.askokcancel("确认",
                                f"你还没有选择cpp文件")
     else:
-        res_text = Parser(path=CPP_PATH).get_result().get_text()
-        # result_str_obj.set(f"解析结果：\n{res_text}")
+        res_text = Parser(path=CPP_PATH).get_result().get_result_text()
         # 清空文本框并刷新
         text.delete(0.0, END)
         text.insert('insert', res_text)

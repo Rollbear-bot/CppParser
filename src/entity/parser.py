@@ -25,50 +25,40 @@ class Parser:
         # skip the blank
         self.lines = [str(line).strip().rstrip() for line in self.raw_lines]
 
-        # self.run()
         self.result = self.run_version3()
 
     def get_result(self):
         return Result(self)
 
-    def run(self):
-        total = "".join(self.raw_lines)
-        in_precompile = False
-        in_string = False
-        in_block = False
-        cache = ""
-
-        for str_index, s in enumerate(total):
-            if in_precompile or in_string or in_block:
-                if in_precompile is True:
-                    # cache += s  # append the char into cache
-                    if s is "\n":
-                        # test
-                        print(f"in_precompile, {cache}, str index:", str_index)
-                        in_precompile = False
-
-            else:
-                # re-init
-                cache = ""
-                in_precompile = in_string = in_block = False
-
-                if s is "#":
-                    in_precompile = True
-                elif s is '"':
-                    in_string = True
-                elif s in "{":
-                    in_block = True
-
-            cache += s
-
-    def run_version2(self):
-        """有穷自动机的概念，使用状态转换思想"""
-        for char in self.raw_str:
-            # la(char)
-            pass
-        cases = {
-
-        }
+    # def run(self):
+    #     total = "".join(self.raw_lines)
+    #     in_precompile = False
+    #     in_string = False
+    #     in_block = False
+    #     cache = ""
+    #
+    #     for str_index, s in enumerate(total):
+    #         if in_precompile or in_string or in_block:
+    #             if in_precompile is True:
+    #                 # cache += s  # append the char into cache
+    #                 if s is "\n":
+    #                     # test
+    #                     print(f"in_precompile, {cache}, str index:", str_index)
+    #                     in_precompile = False
+    #
+    #         else:
+    #             # re-init
+    #             cache = ""
+    #             in_precompile = in_string = in_block = False
+    #
+    #             if s is "#":
+    #                 in_precompile = True
+    #             elif s is '"':
+    #                 in_string = True
+    #             elif s in "{":
+    #                 in_block = True
+    #
+    #         cache += s
 
     def run_version3(self):
         result = []
@@ -82,23 +72,13 @@ class Parser:
                 result_message += f"行{row_id+1}, 预处理语句"
             else:
                 # 其他情况
-                # todo::交给有穷自动机处理
+                # 交给有穷自动机处理
                 res = finite_automation_handler(row)
                 result_message = f"行{row_id+1}: \n"
                 for syb in res:
                     result_message += f"{syb[0]}\t{syb[1]}\n"
 
-                # buffer = ""
-                # for char in row:
-                #     if ord("z") >= ord(char) >= ord("A"):  # 判断英文字母
-                #         buffer += char
-                #     elif buffer in keywords:
-                #         result_message += f"(行{row_id+1}, 字符{row.index(char)+1}, 关键字)"
-
             if result_message != "":
                 result.append(result_message)
 
         return result
-
-    def build_parse_tree(self):
-        pass
