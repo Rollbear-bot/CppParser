@@ -3,32 +3,13 @@
 # @Author: Rollbear
 # @Filename: finite_automation.py
 
+from resource.symbols import operators, other_symbols, keywords
+
 LABELS = []
 BUFFER = ""
 
-keywords = ["asm", "else", "new", "this", "auto", "enum",
-            "operator", "throw", "bool", "explicit", "private",
-            "true", "break", "export", "protected", "try",
-            "case", "extern", "public", "typedef", "catch",
-            "false", "register", "typeid", "char", "float",
-            "reinterpret_cast", "typename", "class", "for",
-            "return", "union", "const", "friend", "short",
-            "unsigned", "const_cast", "goto", "signed",
-            "using", "continue", "if", "sizeof", "virtual",
-            "default", "inline", "static", "void", "delete",
-            "int", "static_cast", "volatile", "do", "long",
-            "struct", "wchar_t", "double", "mutable", "switch",
-            "while", "dynamic_cast", "template"]
 
-operators = ["+", "-", "*", "/", "%", "++", "--", "==", "!=",
-             "<", ">", "<=", ">=", "&&", "||", "!", "&", "|",
-             "^", "~", "<<", ">>", "=", "+=", "-=", "*=", "/=",
-             "%=", "<<=", ">>=", "&=", "^=", "|=", "?"]
-
-other_symbols = [".", "{", "}", "[", "]", ";", "(", ")"]
-
-
-def words_fa_handler(raw_string):
+def fa_handler(raw_string):
     """处理标识符、关键字、数值和其他符号的有穷自动机"""
     global BUFFER, LABELS
     BUFFER = ""
