@@ -3,6 +3,7 @@
 # @Author: Rollbear
 # @Filename: main_gui.py
 
+import tkinter
 from tkinter import *
 from tkinter import filedialog
 from tkinter import messagebox
@@ -11,17 +12,20 @@ from entity.parser import Parser
 
 # 根面板
 root = Tk()  # 创建窗口对象的背景色
+root.geometry("600x400")
 
 # 初始化文本
 CPP_PATH = ""
 file_path_str_obj = StringVar()
 file_path_str_obj.set("当前选择的文件：\nnone")
-result_str_obj = StringVar()
-result_str_obj.set("解析结果：\nnone")
 
 # 初始化组件
 label_file_path = Label(root, textvariable=file_path_str_obj)
-text_result = Label(root, textvariable=result_str_obj)
+
+# 创建滚动条
+scroll = tkinter.Scrollbar()
+# 创建文本框text，设置宽度100，high不是高度，是文本显示的行数设置为3行
+text = tkinter.Text(root)
 
 
 def get_file_path():
@@ -43,7 +47,10 @@ def run():
                                f"你还没有选择cpp文件")
     else:
         res_text = Parser(path=CPP_PATH).get_result().get_text()
-        result_str_obj.set(f"解析结果：\n{res_text}")
+        # result_str_obj.set(f"解析结果：\n{res_text}")
+        # 清空文本框并刷新
+        text.delete(0.0, END)
+        text.insert('insert', res_text)
         pass
 
 
@@ -58,7 +65,11 @@ if __name__ == '__main__':
     button_run = Button(root, command=run, text="开始解析")
     button_run.pack()
 
-    # 展示解析结果的面板
-    text_result.pack()
+    # 将滚动条填充
+    scroll.pack(side=tkinter.RIGHT, fill=tkinter.Y)  # side是滚动条放置的位置，上下左右。fill是将滚动条沿着y轴填充
+    text.pack()
+    # 将滚动条与文本框关联
+    scroll.config(command=text.yview)  # 将文本框关联到滚动条上，滚动条滑动，文本框跟随滑动
+    text.config(yscrollcommand=scroll.set)  # 将滚动条关联到文本框
 
     root.mainloop()

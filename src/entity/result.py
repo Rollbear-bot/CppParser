@@ -9,6 +9,7 @@ class Result:
     def __init__(self, parser_obj):
         self.lines = parser_obj.lines
         self.raw_lines = parser_obj.raw_lines
+        self.result = parser_obj.result
 
     def save(self, output_path):
         # with open(output_path, "w", encoding="utf8") as wf:
@@ -19,7 +20,7 @@ class Result:
         return Concise(self)
 
     def get_text(self):
-        return self.lines
+        return "\n".join(self.result)
 
 
 class Concise(Result):
