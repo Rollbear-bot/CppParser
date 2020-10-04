@@ -4,28 +4,7 @@
 # @Filename: parser.py
 
 from entity.result import Result
-
-
-keywords = ["asm", "else", "new", "this", "auto", "enum",
-            "operator", "throw", "bool", "explicit", "private",
-            "true", "break", "export", "protected", "try",
-            "case", "extern", "public", "typedef", "catch",
-            "false", "register", "typeid", "char", "float",
-            "reinterpret_cast", "typename", "class", "for",
-            "return", "union", "const", "friend", "short",
-            "unsigned", "const_cast", "goto", "signed",
-            "using", "continue", "if", "sizeof", "virtual",
-            "default", "inline", "static", "void", "delete",
-            "int", "static_cast", "volatile", "do", "long",
-            "struct", "wchar_t", "double", "mutable", "switch",
-            "while", "dynamic_cast", "template"]
-
-operators = ["+", "-", "*", "/", "%", "++", "--", "==", "!=",
-             "<", ">", "<=", ">=", "&&", "||", "!", "&", "|",
-             "^", "~", "<<", ">>", "=", "+=", "-=", "*=", "/=",
-             "%=", "<<=", ">>=", "&=", "^=", "|=", "?"]
-
-other_symbols = [".", "{", "}", "[", "]", ";"]
+from entity.finite_automation import words_fa_handler
 
 
 class Parser:
@@ -102,13 +81,19 @@ class Parser:
                 # todo::进一步处理预处理语句
                 result_message += f"行{row_id+1}, 预处理语句"
             else:
-                # todo::其他情况
-                buffer = ""
-                for char in row:
-                    if ord("Z") >= ord(char) >= ord("a"):  # 判断英文字母
-                        buffer += char
-                    elif buffer in keywords:
-                        result_message += f"(行{row_id+1}, 字符{row.index(char)+1}, 关键字)"
+                # 其他情况
+                # todo::交给有穷自动机处理
+                res = words_fa_handler(row)
+                result_message = f"行{row_id+1}: \n"
+                for syb in res:
+                    result_message += f"{syb[0]}\t{syb[1]}\n"
+
+                # buffer = ""
+                # for char in row:
+                #     if ord("z") >= ord(char) >= ord("A"):  # 判断英文字母
+                #         buffer += char
+                #     elif buffer in keywords:
+                #         result_message += f"(行{row_id+1}, 字符{row.index(char)+1}, 关键字)"
 
             if result_message != "":
                 result.append(result_message)
