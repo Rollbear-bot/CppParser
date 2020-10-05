@@ -44,12 +44,20 @@ def case0_root(raw_string, str_index):
 
     if is_digit(cur_char):
         # 识别为数值
-        BUFFER += cur_char
-        if str_index + 1 == len(raw_string):
-            LABELS.append((BUFFER, "数值"))
+        if BUFFER != "":
+            BUFFER += cur_char
+            if str_index + 1 == len(raw_string):
+                LABELS.append((BUFFER, "标识符"))
+                return
+            case1_identifier(raw_string, str_index + 1)  # 跳转到状态1：标识符
             return
-        case2_digit(raw_string, str_index + 1)  # 跳转到状态2：数值
-        return
+        else:
+            BUFFER += cur_char
+            if str_index + 1 == len(raw_string):
+                LABELS.append((BUFFER, "数值"))
+                return
+            case2_digit(raw_string, str_index + 1)  # 跳转到状态2：数值
+            return
 
     if cur_char in other_symbols or cur_char in operators or \
             cur_char == " " or cur_char == "\t":
